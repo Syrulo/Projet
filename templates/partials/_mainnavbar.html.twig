@@ -5,20 +5,19 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto mt-2">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ path('app_categorie') }}"> Catégories </a>
+    <ul class="navbar-nav mr-auto mt-2 align-items-center">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_categorie') }}"><button type="submit" class="btn btn-color">Catégories</button></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Où nous trouver</a>
+        <a class="nav-link" href="#"><button type="submit" class="btn btn-color">Où nous trouver</button></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Notre Histoire</a>
+        <a class="nav-link" href="#"><button type="submit" class="btn btn-color">Notre Histoire</button></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_producteur') }}">Producteurs</a>
+        <a class="nav-link" href="{{ path('app_producteur') }}"><button type="submit" class="btn btn-color">Producteurs</button></a>
       </li>
     </ul>
       <li class="nav-search">
@@ -39,6 +38,10 @@
           <ul class="dropdown-menu">
             {% if is_granted('ROLE_ADMIN') %}
             <li><a class="dropdown-item" href="{{ path('app_admin') }}">AdminDashBoard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            {% endif %}
+            {% if app.user %}
+            <li><a class="dropdown-item" href="{{ path('profil') }}">Mon profil</a></li>
             {% endif %}
             {% if not app.user %}
             <li><a class="dropdown-item" href="{{ path('app_security.login') }}">Connexion</a></li>
@@ -47,6 +50,6 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ path('app_security.logout') }}">Deconnexion</a></li>
             {% endif %}
-            </li>
+          </ul>
         </ul>         
 </nav>

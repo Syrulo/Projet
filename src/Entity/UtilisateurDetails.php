@@ -46,9 +46,9 @@ class UtilisateurDetails
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: "App\Entity\Utilisateur", inversedBy: "utilisateurDetails",cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $utilisateur = null;
+    private $utilisateur;
 
     public function __construct()
     {
@@ -157,20 +157,29 @@ class UtilisateurDetails
         return $this;
     }
 
-    public function getUtilisateurId(): ?Utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
     }
 
-    public function setUtilisateurId(Utilisateur $utilisateur): static
+    public function setUtilisateur(Utilisateur $utilisateur): static
     {
         $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    private $details;
+
+    public function getDetails(): ?string
     {
-        return $this->utilisateur;
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
+
+        return $this;
     }
 }

@@ -1,0 +1,4 @@
+<form action="{{ url('app_admin.producteur.delete', { id: producteur.id }) }}" method="post">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ producteur.id) }}">
+	<button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+</form>

@@ -1,0 +1,52 @@
+{% extends './layout/base.html.twig' %}
+
+{% block title %}
+	Liste des utilisateurs
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="card w-75 mx-auto p-3 mt-5">
+		<h1 class="text-center">Liste des utilisateurs</h1>
+		<table class="table table-striped align-middle">
+			<thead>
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">email</th>
+                    <th scope="col">Prenom</th>
+					<th scope="col">Nom</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Code postal</th>
+					<th scope="col">Created At</th>
+					<th scope="col">Updated At</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for utilisateur in utilisateurs %}
+					<tr>
+						<th scope="row">{{ utilisateur.id }}</th>
+							<td>{{ utilisateur.utilisateurDetails.nom }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.prenom }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.nom }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.tel }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.adresse }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.ville }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.codePostal }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.createdAt ? utilisateur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ utilisateur.utilisateurDetails.updatedAt ? utilisateur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>
+							<div class="d-flex justify-content-around">		
+								<a href="{{ path('app_admin_utilisateur.edit', {'id': utilisateur.id}) }}" class="btn btn-primary"><i class="bi bi-pencil-square color-light"></i></a>
+								{{ include('backend/utilisateur/_delete_form.html.twig') }}
+							</div>
+							</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('app_admin') }}" class="text-center"><button type="submit" class="btn btn-color">Retour au panneau d'administration</button><a>
+	</div>	
+{% endblock %}

@@ -51,6 +51,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\OneToOne(targetEntity: "App\Entity\UtilisateurDetails", mappedBy: "utilisateur", cascade: ["persist", "remove"])]
+    private $utilisateurDetails;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -177,6 +180,28 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getUtilisateurDetails(): ?UtilisateurDetails
+{
+    return $this->utilisateurDetails;
+}
+
+public function setUtilisateurDetails(UtilisateurDetails $utilisateurDetails): self
+{
+    $this->utilisateurDetails = $utilisateurDetails;
+
+    // set the owning side of the relation if necessary
+    if ($utilisateurDetails->getUtilisateur() !== $this) {
+        $utilisateurDetails->setUtilisateur($this);
+    }
+
+    return $this;
+}
+
+public function getUtilisateurDetailsPrenom(): ?string
+{
+    return $this->utilisateurDetails ? $this->utilisateurDetails->getPrenom() : null;
+}
+
     /**
      * @see UserInterface
      */
@@ -185,4 +210,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
 }

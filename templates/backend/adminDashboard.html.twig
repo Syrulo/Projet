@@ -1,0 +1,28 @@
+{% extends './layout/base.html.twig' %}
+
+{% block title %}
+        Panneau d'administration
+        {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5 p-5">
+        <h1 class="text-center">Panneau d'administration</h1>
+	<div class="card w-75 mx-auto p-3 mt-5">
+                <div class="d-flex justify-content-around">
+                <div>
+                <a href="{{ path('app_admin.categorie') }}"><button type="submit" class="btn btn-color">Gérer les catégories</button><a>
+                </div>
+                <div class="">
+                <a href="{{ path('app_admin.producteur') }}"><button type="submit" class="btn btn-color">Gérer les producteurs</button><a>
+                </div>
+                <div>
+                <a href="{{ path('app_admin.produit') }}"><button type="submit" class="btn btn-color">Gérer les produits</button><a>
+                </div>
+                <div>
+                <a href="{{ path('app_admin.utilisateur') }}"><button type="submit" class="btn btn-color">Gérer les utilisateurs</button><a>
+                </div>
+                </div>
+        </div>
+</div>
+{% endblock %}

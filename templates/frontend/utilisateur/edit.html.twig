@@ -1,0 +1,60 @@
+{% extends './layout/base.html.twig' %}
+
+{% block title %}Modifiez votre profil{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="card w-75 mx-auto p-3 mt-5 wrapper">
+        <h1 class="mt4">Formulaire de modification des informations de l'utilisateur</h1>
+{{ form_start(form) }}
+{% if form.utilisateurDetails.prenom is defined and form.utilisateurDetails.nom is defined %}
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_row(form.utilisateurDetails.prenom) }}
+		</div>
+		<div class="col-md-6">
+			{{ form_row(form.utilisateurDetails.nom) }}
+		</div>
+	</div>
+{% endif %}
+
+{% if form.utilisateurDetails.tel is defined %}
+	<div class="row">
+		{{ form_row(form.utilisateurDetails.tel)}}
+	</div>
+{% endif %}
+
+{% if form.utilisateurDetails.adresse is defined %}
+	<div class="row">
+		{{ form_row(form.utilisateurDetails.adresse)}}
+	</div>
+{% endif %}
+
+{% if form.utilisateurDetails.ville is defined %}
+	<div class="row">
+		{{ form_row(form.utilisateurDetails.ville)}}
+	</div>
+{% endif %}
+
+{% if form.utilisateurDetails.code_postal is defined %}
+	<div class="row">
+		{{ form_row(form.utilisateurDetails.code_postal)}}
+	</div>
+{% endif %}
+
+{% if form.roles is defined %}
+	<div class="col-md-12 text-center">
+		<h2>Modifier les rôles de {{utilisateur.utilisateurDetails.prenom}} {{utilisateur.utilisateurDetails.nom}}</h2>
+		{{ form_row(form.roles) }}
+	</div>
+{% endif %}
+
+<div class="text-center">
+	<button class="btn btn-primary">{{ button_label|default('Mettre à jour') }}</button>
+</div>
+{{ form_row(form._token) }}
+{{ form_end(form, {render_rest: false}) }}
+        
+</div>
+</div>
+{% endblock %}

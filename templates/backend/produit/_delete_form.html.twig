@@ -1,0 +1,4 @@
+<form action="{{ url('app_admin.produit.delete', { id: produit.id }) }}" method="post">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}">
+	<button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+</form>

@@ -1,0 +1,47 @@
+{% extends './layout/base.html.twig' %}
+
+{% block title %}Le Potager Caladois - Connexion{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="card w-75 mx-auto p-3 mt-5 wrapper">
+        <h1 class="mt4">Formulaire de connexion</h1>
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+        <div class="alert alert-danger mt-4">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {% if error %}
+            <div class="alert alert-danger mt-4">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        <form action="{{ path('app_security.login') }}" method="post">
+            <div>
+                <label for="username" class="form-label mt-4">Adresse email</label>
+                <input type="email" class="form-control" id="username" name="_username" placeholder="exemple@symrecipe.com" value="{{ last_username }}">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div>
+                <label for="password" class="form-label mt-4">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="_password" placeholder="********">
+            </div>
+            <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">
+                Se connecter
+            </button>
+            </div>
+        </form>
+        <p>Vous n'avez pas de compte ? <a href="{{ path('app_security.inscription') }}">Cliquez ici</a></p>
+    </div>
+    </div>
+{% endblock %}
